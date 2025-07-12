@@ -16,11 +16,37 @@ This isn't like typical documentation. It's a series of short, focused missions 
 
 ---
 
+## Module 0: The "Why" - What's in It for You?
+
+**Goal:** Understand what an "agent" is and why this starter pack is the best way to build one.
+
+### - [ ] Session 1: What is an AI Agent?
+*   **🎯 Objective:** Get a clear, simple definition of an AI Agent.
+*   **🤔 Why it matters:** You're about to build one, so you should know what it is!
+*   **🚀 The Gist:**
+    *   It's more than a chatbot. A chatbot can *talk*. An agent can *do*.
+    *   It can use tools (like APIs, web browsers, or your own code).
+    *   It can have a memory and learn from its interactions.
+    *   It can be proactive and take initiative.
+*   **🎉 Success!:** You can explain to a friend what an AI agent is. It's a computer program that can think, plan, and act to achieve a goal.
+
+### - [ ] Session 2: Why Use this Starter Pack?
+*   **🎯 Objective:** Understand the benefits of the Agent Starter Pack.
+*   **🤔 Why it matters:** This will help you understand the value of what you're learning.
+*   **🚀 The Gist:**
+    *   **It's a shortcut.** You don't have to start from scratch. You get a fully-functional agent out of the box.
+    *   **It's a launchpad.** It's easy to customize and add new features.
+    *   **It's production-ready.** You can deploy your agent to the cloud with a single command.
+    *   **It's a safety net.** We've included best practices for security, cost control, and observability.
+*   **🎉 Success!:** You're excited to start building because you know you're using the right tool for the job.
+
+---
+
 ## Module 1: Your First Agent (100% Local & Free)
 
 **Goal:** Build and customize an agent on your own machine. No cloud costs, no complex setup.
 
-### - [ ] Session 1: Liftoff! Your Development Environment
+### - [ ] Session 3: Liftoff! Your Development Environment
 *   **🎯 Objective:** Get your computer ready to build agents.
 *   **✅ Deliverable:** A working installation of the Agent Starter Pack CLI.
 *   **🚀 Let's Go! (Steps):**
@@ -46,12 +72,12 @@ This isn't like typical documentation. It's a series of short, focused missions 
     agent-cli --help
     ```
     Seeing a list of commands means you're ready for the next mission. Great job!
-*   **🤔 Common Pitfalls & Fixes:**
+*   **🤔 Troubleshooting & FAQ:**
     *   **"Command not found: agent-cli"**: Your system's `PATH` might be misconfigured. The installer usually gives you a command to run to fix this, which looks something like `source /Users/your-name/.cargo/env`. Close and reopen your terminal after running it.
     *   **Permission Errors:** If you see "Permission Denied," you may need to run the install command with `sudo` (macOS/Linux) or in an Administrator terminal (Windows), but try to avoid this if possible.
 *   **💰 Cost Check:** **$0.00**. This is all on your local machine.
 
-### - [ ] Session 2: Create Your First Agent
+### - [ ] Session 4: Create Your First Agent
 *   **🎯 Objective:** Create a new agent project from a template.
 *   **✅ Deliverable:** A new folder on your computer containing the code for a basic agent.
 *   **🚀 Let's Go! (Steps):**
@@ -66,11 +92,11 @@ This isn't like typical documentation. It's a series of short, focused missions 
         *   `Select a deployment target...`: Select **`cloud_run`** (we won't deploy yet, but this prepares our config).
         *   `Select a frontend...`: Select **`none`**.
 *   **🎉 Success!:** A new directory named `my-first-agent` will be created. You can `cd my-first-agent` and see the project files. You just created a complete agent codebase in under a minute!
-*   **🤔 Common Pitfalls & Fixes:**
+*   **🤔 Troubleshooting & FAQ:**
     *   **Git errors:** The `create` command uses `git`. If you don't have Git installed, you'll need to install it first.
 *   **💰 Cost Check:** **$0.00**. Still 100% local.
 
-### - [ ] Session 3: Talk to Your Agent (Locally)
+### - [ ] Session 5: Talk to Your Agent (Locally)
 *   **🎯 Objective:** Run your new agent and interact with it directly from your terminal.
 *   **✅ Deliverable:** A running agent that responds to your prompts.
 *   **🚀 Let's Go! (Steps):**
@@ -92,14 +118,14 @@ This isn't like typical documentation. It's a series of short, focused missions 
         ```
         (Press Enter again to send)
 *   **🎉 Success!:** The agent will respond with a simple, streamed message. You're now having a real conversation with your own AI agent! How cool is that?!
-*   **🤔 Common Pitfalls & Fixes:**
+*   **🤔 Troubleshooting & FAQ:**
     *   **`GOOGLE_API_KEY` error:** The default agent uses the Gemini API. You need to provide an API key.
         1.  Get a key from [Google AI Studio](https://aistudio.google.com/app/apikey).
         2.  Set it as an environment variable. On macOS/Linux: `export GOOGLE_API_KEY="YOUR_KEY_HERE"`. On Windows: `set GOOGLE_API_KEY="YOUR_KEY_HERE"`.
         3.  Then run `agent-cli run` again.
 *   **💰 Cost Check:** **$0.00**. The Gemini API has a generous free tier. You won't be charged for these simple queries.
 
-### - [ ] Session 4: Customize Your Agent's Brain
+### - [ ] Session 6: Customize Your Agent's Brain
 *   **🎯 Objective:** Change the agent's core instructions (its "prompt") to give it a new personality.
 *   **✅ Deliverable:** Your agent will respond in a completely different style.
 *   **🚀 Let's Go! (Steps):**
@@ -122,8 +148,8 @@ This isn't like typical documentation. It's a series of short, focused missions 
         ```
         Who are you?
         ```
-*   **🎉 Success!:** The agent should now respond like a pirate! "Ahoy, I be a helpful assistant, matey!" This is the core development loop: change code, run, test.
-*   **🤔 Common Pitfalls & Fixes:**
+*   **🎉 Success!:** The agent should now respond like a pirate! "Ahoy, I be a helpful assistant, matey!" This is the core development loop: change code, run, test. You've mastered it.
+*   **🤔 Troubleshooting & FAQ:**
     *   **Syntax errors:** If you accidentally break the Python code, the `run` command will show an error. Read the error message carefully—it usually points to the exact line you need to fix.
 *   **💰 Cost Check:** **$0.00**.
 
@@ -159,7 +185,7 @@ Now that your agent is working, let's quickly visualize what you've actually bui
 
 **Goal:** Deploy your agent to the cloud, making it accessible from anywhere. We'll be hyper-focused on cost control.
 
-### - [ ] Session 5: GCP Safety First - Set a Budget!
+### - [ ] Session 7: GCP Safety First - Set a Budget!
 *   **🎯 Objective:** Create a budget alert in your Google Cloud account to prevent surprise bills.
 *   **✅ Deliverable:** An email alert that will be sent if your spending exceeds a set amount (e.g., $5).
 *   **🚀 Let's Go! (Steps):**
@@ -173,7 +199,7 @@ Now that your agent is working, let's quickly visualize what you've actually bui
 *   **🎉 Success!:** You've created a budget. You can now experiment with peace of mind, knowing you'll be alerted long before costs become an issue. This is the most important step for stress-free learning.
 *   **💰 Cost Check:** **$0.00**. Setting a budget is free.
 
-### - [ ] Session 6: Deploy Your Agent to the Cloud
+### - [ ] Session 8: Deploy Your Agent to the Cloud
 *   **🎯 Objective:** Deploy your agent to Google Cloud Run, a serverless platform.
 *   **✅ Deliverable:** A publicly accessible URL for your agent.
 *   **🚀 Let's Go! (Steps):**
@@ -191,7 +217,7 @@ Now that your agent is working, let's quickly visualize what you've actually bui
         ```
         This command automatically builds your agent into a container, pushes it to a registry, and deploys it to Cloud Run. It can take a few minutes the first time.
 *   **🎉 Success!:** The command will finish by printing a **Service URL**. This is your live agent! You did it! You have an AI application running on the internet.
-*   **🤔 Common Pitfalls & Fixes:**
+*   **🤔 Troubleshooting & FAQ:**
     *   **API not enabled:** The command might fail, telling you to enable an API (like `run.googleapis.com` or `artifactregistry.googleapis.com`). The error message includes a `gcloud` command to enable it. Just copy, paste, and run that command, then try `agent-cli deploy` again.
 *   **💰 Cost Check:** **~$0.05**. This step creates a few resources: an Artifact Registry to store the code and the Cloud Run service itself. Cloud Run has a very generous free tier (2 million requests/month), so you'll likely pay **$0.00** for usage unless you send it a massive amount of traffic. The only real cost is for the storage in Artifact Registry, which is pennies per month.
 
@@ -224,7 +250,7 @@ Internet → Google Cloud Load Balancer → Cloud Run (Your Agent) → Gemini AP
 
 </details>
 
-### - [ ] Session 7: Talk to Your Live Agent
+### - [ ] Session 9: Talk to Your Live Agent
 *   **🎯 Objective:** Interact with your deployed agent using its public API.
 *   **✅ Deliverable:** A successful API call to your agent's URL.
 *   **🚀 Let's Go! (Steps):**
@@ -237,7 +263,7 @@ Internet → Google Cloud Load Balancer → Cloud Run (Your Agent) → Gemini AP
         -d '{"prompt": "Who are you?"}'
         ```
 *   **🎉 Success!:** You'll get a streaming response back directly in your terminal, with your pirate agent answering from the cloud! You've just confirmed your deployment is live and working.
-*   **🤔 Common Pitfalls & Fixes:**
+*   **🤔 Troubleshooting & FAQ:**
     *   **Authentication Error:** If you get a 401 or 403 error, your `X-Goog-Api-Key` header is likely missing or incorrect. Double-check that you've pasted the key correctly.
 *   **💰 Cost Check:** **$0.00** (covered by the Cloud Run free tier).
 
@@ -268,7 +294,7 @@ curl -X POST YOUR_SERVICE_URL/run \
 
 </details>
 
-### - [ ] Session 8: The Big Cleanup
+### - [ ] Session 10: The Big Cleanup
 *   **🎯 Objective:** Delete all the cloud resources you created to stop all billing.
 *   **✅ Deliverable:** A clean GCP project with no running services.
 *   **🚀 Let's Go! (Steps):**
@@ -278,7 +304,7 @@ curl -X POST YOUR_SERVICE_URL/run \
         ```
     2.  The CLI will ask for confirmation to delete the Cloud Run service and the Artifact Registry repository. Type `y` and press Enter for both.
 *   **🎉 Success!:** The command will confirm that the resources have been deleted. Your project is now clean, and no further costs will be incurred. Learning to clean up is as important as learning to build. You've completed the full lifecycle!
-*   **🤔 Common Pitfalls & Fixes:**
+*   **🤔 Troubleshooting & FAQ:**
     *   **Lingering resources:** The `teardown` command is good, but it's always wise to double-check in the [Cloud Run](https://console.cloud.google.com/run) and [Artifact Registry](https://console.cloud.google.com/artifacts) pages in the GCP console to ensure everything is gone.
 *   **💰 Cost Check:** **$0.00**. This step stops all future costs. Your total spend for this module should be well under $1.
 
@@ -308,6 +334,41 @@ Your agent works, but to make it "production-ready" for real users, you'd need t
 
 ---
 
+## Module 3: Understanding the Code
+
+**Goal:** Look under the hood of your agent and understand how the different pieces of code work together.
+
+### - [ ] Session 11: The Anatomy of an Agent
+*   **🎯 Objective:** Get a high-level overview of the files in your agent's project directory.
+*   **✅ Deliverable:** A clear understanding of what each file does.
+*   **🚀 Let's Go! (A Guided Tour):**
+    ```mermaid
+    graph TD
+        A[pyproject.toml] --> B(Dockerfile);
+        B --> C{Container Image};
+        C --> D[Cloud Run];
+        E[app/main.py] --> F[app/agent.py];
+        F --> G[LLM];
+        D -- invokes --> E;
+    ```
+    *   `app/agent.py`: This is the heart of your agent. It contains the main logic, the system prompt, and the tools your agent can use.
+    *   `app/main.py`: This is the entry point for your agent. It's responsible for starting the agent and handling incoming requests.
+    *   `pyproject.toml`: This file defines the project's dependencies. It's how you add new packages to your agent.
+    *   `README.md`: This file contains a description of your agent and instructions on how to use it.
+    *   `Dockerfile`: This file contains the instructions for building your agent into a container. You won't need to touch this unless you're doing advanced customization.
+*   **🎉 Success!:** You know where to find the most important code in your agent's project.
+
+### - [ ] Session 12: The Agent's Brain (`agent.py`)
+*   **🎯 Objective:** Understand the key components of the `agent.py` file.
+*   **✅ Deliverable:** You can confidently edit the agent's prompt and add new tools.
+*   **🚀 Let's Go! (Key Concepts):**
+    *   **`system_instruction`**: This is the agent's core identity. It tells the agent how to behave and what its purpose is.
+    *   **`tools`**: This is a list of functions that your agent can call. This is how you give your agent new capabilities.
+    *   **`Agent` class**: This class brings everything together. It initializes the agent with the system instruction and tools, and it handles the conversation with the user.
+*   **🎉 Success!:** You can now customize your agent's behavior by editing the `system_instruction` and adding new tools.
+
+---
+
 ## Next Steps & Future Missions
 
 You've done it! You've built, customized, deployed, and torn down an AI agent. You've mastered the fundamental **Build -> Test -> Deploy -> Cleanup** lifecycle. This is the key to exploring the world of AI agents confidently and affordably.
@@ -324,4 +385,4 @@ Ready to understand the "why" behind the "what"? Continue your journey with thes
 
 *   **🏗️ [Architecture Guide](architecture_guide.md):** See the bigger picture with visual diagrams showing how agents work at different scales, from a single agent to a complex, multi-agent enterprise system.
 *   **🤖 Multi-Agent Systems:** Imagine agents working together. For example, a "Research Agent" could find information, and a "Writer Agent" could use that information to create a document. This is the basis of frameworks like CrewAI.
-*   **🛡️ Enterprise Security:** In a large company, you wouldn't expose your agent directly to the internet. It would sit behind an **API Gateway** (for authentication and rate limiting) inside a **VPC Network** (a private cloud firewall) for maximum security.
+*   **🛡️ Enterprise Security:** In a large company, you wouldn't expose your agent directly to the internet. It would sit behind an **API Gateway** (for authentication and rate limiting) inside a **VPC Network** (a private cloud firewall) for maximum security).
