@@ -50,6 +50,8 @@ Help us spread the word by giving us a star on GitHub!
 ## Quick Links
 
 - **New Users:** [Getting Started Guide](/guide/getting-started)
+- **ADHD-Friendly Learning:** [8-Session Hands-On Guide](/learning_plan)
+- **Architecture Mastery:** [Visual Architecture Guide](/learning_plan_enhancement)
 - **Setup:** [Installation Guide](/guide/installation)
 - **Going Live:** [Deployment Guide](/guide/deployment)
 - **Explore Templates:** [Agent Templates Overview](/agents/overview)

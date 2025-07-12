@@ -122,10 +122,36 @@ This isn't like typical documentation. It's a series of short, focused missions 
         ```
         Who are you?
         ```
-*   **🎉 Success!:** The agent should now respond like a pirate! "Ahoy, I be a helpful assistant, matey!" This is the core development loop: change code, run, test. You've mastered it.
+*   **🎉 Success!:** The agent should now respond like a pirate! "Ahoy, I be a helpful assistant, matey!" This is the core development loop: change code, run, test.
 *   **🤔 Common Pitfalls & Fixes:**
     *   **Syntax errors:** If you accidentally break the Python code, the `run` command will show an error. Read the error message carefully—it usually points to the exact line you need to fix.
 *   **💰 Cost Check:** **$0.00**.
+
+<details>
+<summary><strong>🧠 Deeper Dive: Visualizing Your Local Architecture (Optional, 5 min)</strong></summary>
+
+Now that your agent is working, let's quickly visualize what you've actually built.
+
+**Your Current Setup:**
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│    You      │────▶│  Your Agent │────▶│   Gemini    │
+│ (Terminal)  │     │  (Python)   │     │    API      │
+└─────────────┘     └─────────────┘     └─────────────┘
+```
+
+**Understanding the Flow:**
+1. **You** type a prompt in your terminal.
+2. **Your Agent** (the Python code in `app/agent.py`) processes it using your custom `system_instruction`.
+3. **The Gemini API** receives the request and generates the response based on the instructions.
+4. **Your Agent** streams the response back to your terminal.
+
+**Checkpoint Questions:**
+- Where is your agent's "brain" located? (In the `system_instruction` variable in your Python code).
+- What happens if the Gemini API is down? (Your agent won't be able to get a response and will likely error).
+- Why is this considered "local"? (Because all the code you wrote is running on your machine. The only external part is the API call to Google).
+
+</details>
 
 ---
 
@@ -169,6 +195,35 @@ This isn't like typical documentation. It's a series of short, focused missions 
     *   **API not enabled:** The command might fail, telling you to enable an API (like `run.googleapis.com` or `artifactregistry.googleapis.com`). The error message includes a `gcloud` command to enable it. Just copy, paste, and run that command, then try `agent-cli deploy` again.
 *   **💰 Cost Check:** **~$0.05**. This step creates a few resources: an Artifact Registry to store the code and the Cloud Run service itself. Cloud Run has a very generous free tier (2 million requests/month), so you'll likely pay **$0.00** for usage unless you send it a massive amount of traffic. The only real cost is for the storage in Artifact Registry, which is pennies per month.
 
+<details>
+<summary><strong>🧠 Deeper Dive: What Happened During Deployment? (Optional, 7 min)</strong></summary>
+
+The `agent-cli deploy` command did several powerful things for you automatically. Understanding them is key to understanding the cloud.
+
+**Your New Architecture:**
+```
+Internet → Google Cloud Load Balancer → Cloud Run (Your Agent) → Gemini API
+```
+
+**The Steps Under the Hood:**
+1.  **Containerization:** Your agent's code was packaged into a standard Docker container.
+2.  **Push to Registry:** The container was uploaded to Google Artifact Registry, a secure place to store your application images.
+3.  **Deployment to Cloud Run:** Google Cloud Run took your container and created a managed, serverless service from it.
+4.  **Configuration:** Cloud Run automatically provisioned a public URL and secured it with a free SSL certificate (HTTPS).
+
+**Hands-On Exploration:**
+1.  Visit the [Cloud Run Console](https://console.cloud.google.com/run).
+2.  Click on your service name (e.g., `my-first-agent`).
+3.  Look at the **Metrics** tab - you can see request counts, latency, and errors in real-time!
+4.  Check the **Logs** tab - you can see the output from your agent as people use it.
+
+**Key Insights:**
+-   **Serverless:** You don't manage any servers. Cloud Run automatically starts your agent when a request comes in and shuts it down when it's idle (saving you money).
+-   **Scalable:** If your agent suddenly gets 1,000 users, Cloud Run will automatically scale up to handle the load.
+-   **Managed:** Google handles all the underlying infrastructure, networking, and security patching.
+
+</details>
+
 ### - [ ] Session 7: Talk to Your Live Agent
 *   **🎯 Objective:** Interact with your deployed agent using its public API.
 *   **✅ Deliverable:** A successful API call to your agent's URL.
@@ -186,6 +241,33 @@ This isn't like typical documentation. It's a series of short, focused missions 
     *   **Authentication Error:** If you get a 401 or 403 error, your `X-Goog-Api-Key` header is likely missing or incorrect. Double-check that you've pasted the key correctly.
 *   **💰 Cost Check:** **$0.00** (covered by the Cloud Run free tier).
 
+<details>
+<summary><strong>🧠 Deeper Dive: Understanding the API Call (Optional, 5 min)</strong></summary>
+
+The `curl` command you just used is a standard way to interact with APIs. Let's break it down. Your agent is following **REST API** conventions.
+
+```bash
+# The Method: POST means you are sending data to create a new resource (in this case, a new conversation turn).
+curl -X POST YOUR_SERVICE_URL/run \
+
+# The Headers: These provide metadata about your request.
+# Content-Type tells the server you're sending data in JSON format.
+-H "Content-Type: application/json" \
+# X-Goog-Api-Key is a custom header for authentication.
+-H "X-Goog-Api-Key: YOUR_GOOGLE_API_KEY" \
+
+# The Body: This is the actual data you're sending.
+# It's a JSON object with a "prompt" key.
+-d '{"prompt": "Who are you?"}'
+```
+
+**Why these choices matter:**
+-   **POST:** You use `POST` because you're *creating* a new request for the agent to process.
+-   **JSON:** This is the universal language of modern web APIs. It's easy for any programming language to create and parse.
+-   **API Key:** This is a simple but effective way to control access to your agent for prototyping. In a production application, you would use a more robust system like OAuth.
+
+</details>
+
 ### - [ ] Session 8: The Big Cleanup
 *   **🎯 Objective:** Delete all the cloud resources you created to stop all billing.
 *   **✅ Deliverable:** A clean GCP project with no running services.
@@ -200,16 +282,46 @@ This isn't like typical documentation. It's a series of short, focused missions 
     *   **Lingering resources:** The `teardown` command is good, but it's always wise to double-check in the [Cloud Run](https://console.cloud.google.com/run) and [Artifact Registry](https://console.cloud.google.com/artifacts) pages in the GCP console to ensure everything is gone.
 *   **💰 Cost Check:** **$0.00**. This step stops all future costs. Your total spend for this module should be well under $1.
 
+<details>
+<summary><strong>🧠 Deeper Dive: What's Missing for Production? (Optional, 8 min)</strong></summary>
+
+Your agent works, but to make it "production-ready" for real users, you'd need to add more layers of robustness.
+
+**The Production Readiness Checklist:**
+
+*   **Security:**
+    *   [ ] **Robust Authentication:** Move beyond simple API keys to user accounts (e.g., OAuth).
+    *   [ ] **Rate Limiting:** Prevent abuse and control costs by limiting how often a user can call the agent.
+    *   [ ] **Input Validation:** Sanitize user prompts to prevent malicious inputs.
+    *   [x] **HTTPS Everywhere:** Already handled by Cloud Run!
+*   **Reliability:**
+    *   [ ] **Graceful Error Handling:** What happens if the Gemini API is down? Your agent should return a helpful message, not just crash.
+    *   [ ] **Monitoring & Alerting:** Set up alerts to notify you if your agent goes down or experiences a spike in errors.
+    *   [ ] **Load Testing:** Intentionally send a huge amount of traffic to your agent to see how it performs under pressure.
+*   **Cost Control:**
+    *   [ ] **Request Limits:** Implement daily or monthly caps per user to prevent runaway spending.
+    *   [ ] **Usage Analytics:** Track how users are interacting with your agent to understand cost drivers.
+
+**Insight:** In a real-world application, the core logic might be 20% of the code, while the other 80% is dedicated to error handling, security, monitoring, and other production concerns!
+
+</details>
+
 ---
 
 ## Next Steps & Future Missions
 
-You've done it! You've built, customized, deployed, and torn down an AI agent. You've mastered the fundamental workflow.
+You've done it! You've built, customized, deployed, and torn down an AI agent. You've mastered the fundamental **Build -> Test -> Deploy -> Cleanup** lifecycle. This is the key to exploring the world of AI agents confidently and affordably.
 
-Here are some ideas for your next missions:
+### More Hands-On Missions
 
 *   **Deploy a UI:** Try the `adk_gemini_fullstack` template to create an agent with a web interface.
 *   **Give Your Agent Tools:** Explore how to give your agent access to other APIs (e.g., a weather API, a search engine).
 *   **Deeper Customization:** Experiment with different models, prompts, and logic in the `agent.py` file.
 
-This structured approach of **Build -> Test -> Deploy -> Cleanup** is your key to exploring the world of AI agents confidently and affordably.
+### Advanced Learning Path
+
+Ready to understand the "why" behind the "what"? Continue your journey with these concepts.
+
+*   **🏗️ [Architecture Guide](architecture_guide.md):** See the bigger picture with visual diagrams showing how agents work at different scales, from a single agent to a complex, multi-agent enterprise system.
+*   **🤖 Multi-Agent Systems:** Imagine agents working together. For example, a "Research Agent" could find information, and a "Writer Agent" could use that information to create a document. This is the basis of frameworks like CrewAI.
+*   **🛡️ Enterprise Security:** In a large company, you wouldn't expose your agent directly to the internet. It would sit behind an **API Gateway** (for authentication and rate limiting) inside a **VPC Network** (a private cloud firewall) for maximum security.
