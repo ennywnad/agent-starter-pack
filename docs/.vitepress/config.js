@@ -44,6 +44,13 @@ export default defineConfig({
         ]
       },
       {
+        text: 'Adventures',
+        items: [
+          { text: 'CI/CD Triage Agent', link: '/adventure_ci_cd_triage_agent' },
+          { text: 'The Evolution of an Agent', link: '/agent_evolution' }
+        ]
+      },
+      {
         text: 'Authoring Templates',
         items: [
           { text: 'Remote Templating', link: '/guide/remote-templating' },
