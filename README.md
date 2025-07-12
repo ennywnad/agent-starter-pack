@@ -56,6 +56,14 @@ See [Installation Guide](https://googlecloudplatform.github.io/agent-starter-pac
 
 ---
 
+## 🧠 ADHD-Friendly Learning Guide
+
+New to agent development or prefer a more structured, hands-on approach? Our **[ADHD-Friendly Learning Guide](./docs/learning_plan.md)** is designed for you.
+
+It breaks down the process of building, deploying, and managing agents into short, 15-minute, focused sessions with clear checkpoints and immediate feedback. It's the perfect way to learn the ropes in a way that's engaging and respects your time and attention.
+
+---
+
 ## 🤖 Agents
 
 | Agent Name                  | Description                                                                                                                       |
